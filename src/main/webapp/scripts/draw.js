@@ -1,14 +1,38 @@
 const canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
+const radiusInPixel = 50;
+const centerX = 151.5
+const centerY = 151.5
+const widthAxisY = 3
+const heightAxisX = 3
 draw()
 function draw(){
 
-    ctx.clearRect(0, 0, 350, 350);
+    ctx.clearRect(0, 0, 325, 325);
+    ctx.fillStyle = 'black'
+
+    //четверть круга
+    ctx.beginPath()
+    ctx.moveTo(centerX, centerY)
+    ctx.arc(centerX, centerY, radiusInPixel, 4.73, 0, false)
+    ctx.fillStyle = 'blue'
+    ctx.fill()
+
+    //квадрат
+    ctx.beginPath()
+    ctx.fillRect(centerX - radiusInPixel, centerY - radiusInPixel, radiusInPixel, radiusInPixel)
+
+    //треугольник
+    ctx.moveTo(centerX + radiusInPixel, centerY)
+    ctx.lineTo(centerX, centerY + radiusInPixel)
+    ctx.lineTo(centerX, centerY)
+    ctx.fill()
+
     ctx.fillStyle = 'black'
     //оси
     ctx.beginPath()
-    ctx.fillRect(150, 25, 3, 250)
-    ctx.fillRect(25, 150, 250, 3)
+    ctx.fillRect(centerX - widthAxisY/2, 25, widthAxisY, 250)
+    ctx.fillRect(25, centerY - heightAxisX/2, 250, heightAxisX)
 
     // Y X
     ctx.font = "15px serif";
@@ -16,63 +40,46 @@ function draw(){
     ctx.fillText("X", 275, 145);
 
     //верхняя стрелка
-    ctx.moveTo(151.5, 27)
+    ctx.moveTo(centerX, 27)
     ctx.lineTo(142, 35)
-    ctx.moveTo(151.5, 22)
+    ctx.moveTo(centerX, 22)
     ctx.lineTo(141, 34)
-    ctx.lineTo(151.5, 27)
+    ctx.lineTo(centerX, 27)
     ctx.fill()
 
-    ctx.moveTo(151.5, 27)
+    ctx.moveTo(centerX, 27)
     ctx.lineTo(162, 35)
-    ctx.moveTo(151.5, 22)
+    ctx.moveTo(centerX, 22)
     ctx.lineTo(163, 34)
-    ctx.lineTo(151.5, 27)
+    ctx.lineTo(centerX, 27)
     ctx.fill()
 
     //боковая стрелка
-    ctx.moveTo(272, 151.5)
+    ctx.moveTo(272, centerY)
     ctx.lineTo(264, 140)
-    ctx.moveTo(276, 151.5)
+    ctx.moveTo(276, centerY)
     ctx.lineTo(263, 139)
-    ctx.lineTo(272, 151.5)
+    ctx.lineTo(272, centerY)
     ctx.fill()
 
-    ctx.moveTo(272, 151.5)
+    ctx.moveTo(272, centerY)
     ctx.lineTo(264, 165)
-    ctx.moveTo(276, 151.5)
+    ctx.moveTo(276, centerY)
     ctx.lineTo(263, 164)
-    ctx.lineTo(272, 151.5)
-    ctx.fill()
-
-    //четверть круга
-    ctx.beginPath()
-    ctx.moveTo(152, 150)
-    ctx.arc(150, 150, 50, 4.76, 0, false)
-    ctx.fillStyle = 'blue'
-    ctx.fill()
-
-    //квадрат
-    ctx.beginPath()
-    ctx.fillRect(100, 100, 50, 50)
-
-    //треугольник
-    ctx.moveTo(200, 152.5)
-    ctx.lineTo(152.5, 200)
-    ctx.lineTo(152.5, 152.5)
+    ctx.lineTo(272, centerY)
     ctx.fill()
 
     //черточки
     ctx.fillStyle = 'black'
-    ctx.fillRect(147, 100, 8, 2)
-    ctx.fillRect(147, 125, 8, 2)
-    ctx.fillRect(147, 175, 8, 2)
-    ctx.fillRect(147, 198, 8, 2)
+    ctx.fillRect(centerX - 4.5, centerY - radiusInPixel, 8, 2)
+    ctx.fillRect(centerX - 4.5, centerY - radiusInPixel/2, 8, 2)
+    ctx.fillRect(centerX - 4.5, centerY + radiusInPixel/2, 8, 2)
+    ctx.fillRect(centerX - 4.5, centerY + radiusInPixel, 8, 2)
 
-    ctx.fillRect(100, 147, 2, 8)
-    ctx.fillRect(125, 147, 2, 8)
-    ctx.fillRect(175, 147, 2, 8)
-    ctx.fillRect(198, 147, 2, 8)
+    ctx.fillRect(centerX - radiusInPixel, centerY - 4.5, 2, 8)
+    ctx.fillRect(centerX - radiusInPixel/2, centerY - 4.5, 2, 8)
+    ctx.fillRect(centerX + radiusInPixel/2, centerY - 4.5, 2, 8)
+    ctx.fillRect(centerX + radiusInPixel, centerY - 4.5, 2, 8)
 
 
 }

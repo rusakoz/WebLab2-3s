@@ -4,10 +4,42 @@ let countScroll = 0;
 
 canvas2.addEventListener('mousedown', function (event){
     console.log(event.offsetX + ' ' + event.offsetY)
+    const coordR = document.getElementById('coordX')
+    if (!validX(coordR.value)){
+        removeIfExists('errMessage')
+        const formHTML = document.getElementById('form2');
+        appendBeforeError('Не верно введена координата R', formHTML);
+        return;
+    }
+    if (validXYR(event.offsetX, event.offsetY, coordR.value))
+        console.log('збс')
+    else {console.log('ндэ')}
 })
+
+// Валидация координат X Y
+function validXYR(X, Y, R){
+    const localRadius = radiusInPixel * R
+    console.log(radiusInPixel)
+    return ((Math.abs(X - centerX) <= localRadius && Math.abs(Y - centerY) <= localRadius && X <= centerX && Y <= centerY) ||
+        ((X - centerX)**2 + (Y - centerY)**2 <= localRadius**2 && X >= centerX && Y <= centerY) ||
+        (Math.abs(Y - centerY) + Math.abs(X - centerY) <= localRadius && X >= centerX && Y >= centerY))
+}
+
+
+// Валидация для радиуса
+function validR(coordR){
+    if (coordR <= 3 && coordR >= -3 && isNaN(coordR))
+        return true;
+}
 
 function validX(coordX){
     if (coordX <= 3 && coordX >= -3 && coordX !== '')
+        return true;
+}
+
+function validY(coordY){
+    if (coordY === -2 || coordY === -1.5 || coordY === -1 || coordY === -0.5 || coordY === 0 || coordY === 0.5
+        || coordY === 1 || coordY === 1.5 || coordY === 2)
         return true;
 }
 
