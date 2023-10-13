@@ -4,9 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Вторая лаба по Вебу</title>
-  <link rel="stylesheet" href="assets/main.css">
-  <script src="scripts/draw.js" defer></script>
-  <script src="scripts/script.js" defer></script>
+  <style><%@include file="/assets/main.css"%></style>
 </head>
 
 
@@ -58,7 +56,7 @@
     <td class="main-td1"></td>
 
     <td class="main-td1" colspan="3" rowspan="2">
-      <form id="form2">
+      <form id="form2" method="post" action="Hel">
 
         <label> выберите R
           <select id="radiusR" name="radiusR">
@@ -135,5 +133,8 @@
   </tbody>
 
   <%@ include file="FooterHeader/footer.jsp"%>
+
+  <script type="text/javascript" defer><%@include file="/scripts/draw.js"%></script>
+  <script type="text/javascript" defer><%@include file="/scripts/script.js"%></script>
 
 </table>
