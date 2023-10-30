@@ -14,7 +14,10 @@ canvas2.addEventListener('mousedown', function (event){
     }
     console.log(validXY(event.offsetX, event.offsetY))
     if (validXY(event.offsetX, event.offsetY)) {
-        fetchToServer(event.offsetX, event.offsetY, coordR.value, centerX, centerY, radiusInPixel, 'AreaFormData')
+        fetchToServer(convertToPixelCoord(event.offsetX, centerX),
+                      convertToPixelCoord(event.offsetY, centerY),
+                      convertToPixelRadius(coordR.value, radiusInPixel),
+                      'AreaFormData')
     }
 })
 
@@ -26,11 +29,11 @@ function convertToPixelRadius(radius, pixelRadius){
     return radius * pixelRadius
 }
 
-function fetchToServer(X, Y, R, centerX, centerY, radiusInPixel, URL){
+function fetchToServer(X, Y, R, URL){
     const formData = new URLSearchParams()
-    formData.append('X', convertToPixelCoord(X, centerY).toString())
-    formData.append('Y', convertToPixelCoord(Y, centerY).toString())
-    formData.append('R', convertToPixelRadius(R, radiusInPixel))
+    formData.append('X', X)
+    formData.append('Y', Y)
+    formData.append('R', R)
     fetch(URL, {
         method: 'POST',
         body: formData
@@ -54,7 +57,7 @@ function checkHit(X, Y, R){
 
 // Валидация для радиуса
 function validR(coordR){
-    return coordR <= 3 && coordR >= -3 && isNaN(coordR)
+    return coordR <= 3 && coordR >= -3 && coordR !== ''
 }
 
 function validX(coordX){

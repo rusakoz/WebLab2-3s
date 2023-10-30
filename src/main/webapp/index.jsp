@@ -3,8 +3,12 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Вторая лаба по Вебу</title>
-  <style><%@include file="/assets/main.css"%></style>
+<%--  <style><%@include file="/assets/main.css"%></style>--%>
+  <LINK REL="StyleSheet" HREF="<%=request.getContextPath()%>/assets/main.css" TYPE="text/css">
+  <script src="scripts/draw.js" defer></script>
+  <script src="scripts/script.js" defer></script>
 </head>
 
 
@@ -56,7 +60,7 @@
     <td class="main-td1"></td>
 
     <td class="main-td1" colspan="3" rowspan="2">
-      <form id="form2" method="post" action="Hel">
+      <form id="form2" method="get" action="Hel">
 
         <label> выберите R
           <select id="radiusR" name="radiusR">
@@ -134,7 +138,7 @@
 
   <%@ include file="FooterHeader/footer.jsp"%>
 
-  <script type="text/javascript" defer><%@include file="/scripts/draw.js"%></script>
-  <script type="text/javascript" defer><%@include file="/scripts/script.js"%></script>
+<%--  <script type="text/javascript" charset="UTF-8"><%@include file="/scripts/draw.js"%></script>--%>
+<%--  <script type="text/javascript" charset="UTF-8"><%@include file="/scripts/script.js"%></script>--%>
 
 </table>
