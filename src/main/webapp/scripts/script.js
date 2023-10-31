@@ -38,7 +38,15 @@ function fetchToServer(X, Y, R, URL){
         method: 'POST',
         body: formData
     })
-        .then((res) => console.log(res.status))
+        .then((res) => {
+            if (res.status !== 200){
+                console.log(res.status)
+                res.text().then((res)=> {
+                    console.log(res)
+                    // ТУТ НАДО ВЫВОДИТЬ ОШИБКУ КЛИЕНТУ
+                })
+            }
+        })
         .catch((err) => console.warn(err))
 }
 

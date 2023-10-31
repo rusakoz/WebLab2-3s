@@ -6,14 +6,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Вторая лаба по Вебу</title>
 <%--  <style><%@include file="/assets/main.css"%></style>--%>
-  <LINK REL="StyleSheet" HREF="<%=request.getContextPath()%>/assets/main.css" TYPE="text/css">
+  <LINK REL="StyleSheet" HREF="assets/main.css" TYPE="text/css">
   <script src="scripts/draw.js" defer></script>
   <script src="scripts/script.js" defer></script>
 </head>
 
 
 <table>
-
 
   <%@ include file="FooterHeader/header.jsp"%>
 
@@ -131,8 +130,6 @@
     <td class="main-td1"></td>
     <td class="main-td1"></td>
   </tr>
-
-
 
   </tbody>
 

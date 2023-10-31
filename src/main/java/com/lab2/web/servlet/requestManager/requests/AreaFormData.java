@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AreaFormData implements Request {
+    public boolean validationData(HttpServletRequest request){
+        return request.getParameter("X") != null && request.getParameter("Y") != null && request.getParameter("R") != null;
+    }
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("X") != null && request.getParameter("Y") != null && request.getParameter("R") != null) {
+        if (validationData(request)) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("checkArea");
             dispatcher.forward(request, response);
         }else {
