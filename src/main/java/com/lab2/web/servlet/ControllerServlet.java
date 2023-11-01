@@ -1,45 +1,43 @@
 package com.lab2.web.servlet;
 
-import com.lab2.web.servlet.requestManager.Request;
-import com.lab2.web.servlet.requestManager.requests.AreaFormData;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
-@WebServlet(name = "ControllerServlet", value = "/")
+@WebServlet(name = "ControllerServlet", value = "/controller")
 public class ControllerServlet extends HttpServlet {
-    Map<String, Request> delegateManager;
+
+    public boolean validationData(HttpServletRequest request){
+        return request.getParameter("X") != null && request.getParameter("Y") != null && request.getParameter("R") != null;
+    }
+
     @Override
     public void init() throws ServletException {
-        delegateManager = new HashMap<>();
-        delegateManager.put("/AreaFormData", new AreaFormData());
 
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getServletPath();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getServletPath();
         System.err.println(action);
-        Request request = delegateManager.get(action);
-        PrintWriter out = resp.getWriter();
-        if (request != null){
-            request.execute(req, resp);
+        System.err.println("ватафак");
+        if (validationData(request)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("checkArea");
+            dispatcher.forward(request, response);
         }else {
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            out.write("Incorrect");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            dispatcher.forward(request, response);
+            System.err.println("редирект в jsp");
         }
-        out.close();
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }

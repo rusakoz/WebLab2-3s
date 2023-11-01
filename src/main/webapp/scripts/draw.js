@@ -14,17 +14,17 @@ function draw(){
     //четверть круга
     ctx.beginPath()
     ctx.moveTo(centerX, centerY)
-    ctx.arc(centerX, centerY, radiusInPixel, 4.73, 0, false)
+    ctx.arc(centerX, centerY, radiusInPixel, 1.55, 3.11, false)
     ctx.fillStyle = 'blue'
     ctx.fill()
 
     //квадрат
     ctx.beginPath()
-    ctx.fillRect(centerX - radiusInPixel, centerY - radiusInPixel, radiusInPixel, radiusInPixel)
+    ctx.fillRect(centerX, centerY - radiusInPixel, radiusInPixel, radiusInPixel)
 
     //треугольник
-    ctx.moveTo(centerX + radiusInPixel, centerY)
-    ctx.lineTo(centerX, centerY + radiusInPixel)
+    ctx.moveTo(centerX, centerY - radiusInPixel)
+    ctx.lineTo(centerX - radiusInPixel/2, centerY)
     ctx.lineTo(centerX, centerY)
     ctx.fill()
 

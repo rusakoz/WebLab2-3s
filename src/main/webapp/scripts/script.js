@@ -6,23 +6,29 @@ canvas2.addEventListener('mousedown', function (event){
     console.log(event.offsetX + ' ' + event.offsetY)
     const coordR = document.getElementById('coordX')
 
+
     if (!validX(coordR.value)){
         removeIfExists('errMessage')
         const formHTML = document.getElementById('form2');
         appendBeforeError('Неверно введена координата R', formHTML);
         return;
     }
-    console.log(validXY(event.offsetX, event.offsetY))
-    if (validXY(event.offsetX, event.offsetY)) {
-        fetchToServer(convertToPixelCoord(event.offsetX, centerX),
-                      convertToPixelCoord(event.offsetY, centerY),
-                      convertToPixelRadius(coordR.value, radiusInPixel),
-                      'AreaFormData')
+    console.log(validPixelXY(event.offsetX, event.offsetY))
+    if (validPixelXY(event.offsetX, event.offsetY)) {
+
+        fetchToServer(convertToPixelX(event.offsetX, centerX),
+                      convertToPixelY(event.offsetY, centerY),
+                      radiusInPixel,
+                      'controller')
     }
 })
 
-function convertToPixelCoord(coord, centerPixelCoord){
-    return Math.abs(coord - centerPixelCoord)
+function convertToPixelY(coord, centerPixelCoord){
+    return centerPixelCoord - coord
+}
+
+function convertToPixelX(coord, centerPixelCoord){
+    return coord - centerPixelCoord
 }
 
 function convertToPixelRadius(radius, pixelRadius){
@@ -46,35 +52,37 @@ function fetchToServer(X, Y, R, URL){
                     // ТУТ НАДО ВЫВОДИТЬ ОШИБКУ КЛИЕНТУ
                 })
             }
+            res.text().then((res)=>console.log(res))
         })
         .catch((err) => console.warn(err))
 }
 
-function validXY(X, Y){
+function validPixelXY(X, Y){
     return (!isNaN(X) && !isNaN(Y))
 }
 
 function checkHit(X, Y, R){
-    const localRadius = radiusInPixel * R
+    console.log(Y - centerY)
 
-    return ((Math.abs(X - centerX) <= localRadius && Math.abs(Y - centerY) <= localRadius && X <= centerX && Y <= centerY) ||
-        ((X - centerX)**2 + (Y - centerY)**2 <= localRadius**2 && X >= centerX && Y <= centerY) ||
-        (Math.abs(Y - centerY) + Math.abs(X - centerY) <= localRadius && X >= centerX && Y >= centerY))
+    return (X <= R && Y <= R && X >= 0 &&  Y >= 0) ||
+            (X**2 + Y**2 <= R**2 && X <= 0 && Y <= 0) ||
+            (Math.abs(Y) + Math.abs(X) * 2 <= R && X <= 0 && Y >= 0)
+
 }
 
 
 // Валидация для радиуса
 function validR(coordR){
-    return coordR <= 3 && coordR >= -3 && coordR !== ''
+    return coordR >= 1 && coordR <= 5 && coordR !== ''
 }
 
 function validX(coordX){
-    return coordX <= 3 && coordX >= -3 && coordX !== ''
+    return coordX >= -3 && coordX <= 3 && coordX !== ''
 }
 
 function validY(coordY){
-    return coordY === -2 || coordY === -1.5 || coordY === -1 || coordY === -0.5 || coordY === 0 || coordY === 0.5
-        || coordY === 1 || coordY === 1.5 || coordY === 2
+    return (coordY === -2 || coordY === -1.5 || coordY === -1 || coordY === -0.5 || coordY === 0 || coordY === 0.5
+        || coordY === 1 || coordY === 1.5 || coordY === 2)
 }
 
 function getRadioValueByName(elemRadio) {
@@ -84,59 +92,25 @@ function getRadioValueByName(elemRadio) {
     }
 }
 
-// form.addEventListener('submit', function (event){
-//
-//     event.preventDefault()
-//
-//     const coordX = document.getElementById('coordX')
-//     const radiusR = document.getElementById('radiusR')
-//     const radio = document.getElementsByName('coordY');
-//
-//     const coordY = getRadioValueByName(radio);
-//
-//     //Если вдруг кто-то уберет checked
-//     if (coordY === 'undefined'){
-//         removeIfExists('errMessage')
-//         const formHTML = document.getElementById('form2');
-//         appendBeforeError('Выберите координату Y', formHTML);
-//         return;
-//     }
-//
-//     if (!validX(coordX.value)){
-//         removeIfExists('errMessage')
-//         const formHTML = document.getElementById('form2');
-//         appendBeforeError('Не верно введена координата X', formHTML);
-//         return;
-//     }
-//
-//
-//     const formData = new FormData();
-//     formData.append('coordX', parseFloat(coordX.value))
-//     formData.append('coordY', coordY)
-//     formData.append('radiusR', radiusR.value)
-//     fetch('lab1/script.php', {
-//         method: 'POST',
-//         body: formData
-//     }).then((res) => {
-//
-//         if (res.status !== 200){
-//             alert(errorsList.get(res.statusText))
-//             return Promise.reject(res.status)
-//         }
-//
-//         res.json().then((res) => {
-//
-//             removeIfExists('errMessage')
-//
-//             scrollTable(res['R'], res['X'], res['Y'], res['state'], res['date'], res['time'], document.querySelectorAll('#table-out > tr'), 0, 5, countScroll)
-//             countScroll++
-//
-//             printPoint(res['R'], res['X'], res['Y'])
-//
-//         })
-//     }).catch((err) => console.warn(err))
-//
-// })
+form.addEventListener('submit', function (event){
+
+    event.preventDefault()
+
+    const coordX = document.getElementById('coordX')
+    const radiusR = document.getElementById('radiusR')
+
+    const radio = document.getElementsByName('coordY');
+    const coordY = getRadioValueByName(radio);
+
+    if (!validX(coordX.value) || !validY(parseFloat(coordY)) || !validR(radiusR.value)){
+        removeIfExists('errMessage')
+        const formHTML = document.getElementById('form2');
+        appendBeforeError('Неверно введены координаты', formHTML);
+        return;
+    }
+
+    fetchToServer(coordX.value, coordY, radiusR.value, 'controller')
+})
 
 
 function removeIfExists(elemId){

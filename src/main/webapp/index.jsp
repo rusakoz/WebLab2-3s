@@ -3,7 +3,6 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Вторая лаба по Вебу</title>
 <%--  <style><%@include file="/assets/main.css"%></style>--%>
   <LINK REL="StyleSheet" HREF="assets/main.css" TYPE="text/css">
@@ -59,7 +58,7 @@
     <td class="main-td1"></td>
 
     <td class="main-td1" colspan="3" rowspan="2">
-      <form id="form2" method="get" action="Hel">
+      <form id="form2">
 
         <label> выберите R
           <select id="radiusR" name="radiusR">
