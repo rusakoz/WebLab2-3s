@@ -9,16 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d833976-b7aa-46f9-be65-cac543614b4e" name="Changes" comment="Update1.4">
+    <list default="true" id="1d833976-b7aa-46f9-be65-cac543614b4e" name="Changes" comment="Update1.5">
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab2/web/model/CheckHit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab2/web/model/CheckHit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lab2/web/servlet/AreaCheckServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab2/web/servlet/AreaCheckServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lab2/web/servlet/ControllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab2/web/servlet/ControllerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab2/web/servlet/requestManager/Request.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab2/web/servlet/requestManager/requests/AreaFormData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/FooterHeader/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/include/footerHeader/footer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/FooterHeader/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/include/footerHeader/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/draw.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/draw.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,11 +30,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -53,6 +54,9 @@
         <option name="url" value="https://github.com/rusakoz/WebLab2-3s.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="JspContextManager">
+    <jsp-to-context jsp-file="file://$PROJECT_DIR$/src/main/webapp/include/modal/alert.jsp" context-file="file://$PROJECT_DIR$/src/main/webapp/index.jsp" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -96,6 +100,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ruslan\IdeaProjects\WebLab2\src\main\webapp\include" />
+    </key>
+  </component>
   <component name="RunManager" selected="JBoss/WildFly Server.JBoss/WildFly 21.0.0.Final2">
     <configuration name="JBoss/WildFly 21.0.0.Final" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss/WildFly 21.0.0.Final" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/WebLab2" />
@@ -275,7 +284,8 @@
       <workItem from="1698859225515" duration="311000" />
       <workItem from="1698859604903" duration="655000" />
       <workItem from="1698860271991" duration="783000" />
-      <workItem from="1698861067938" duration="11786000" />
+      <workItem from="1698861067938" duration="12187000" />
+      <workItem from="1698918924447" duration="19113000" />
     </task>
     <task id="LOCAL-00001" summary="FirstCommit">
       <option name="closed" value="true" />
@@ -325,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698786995935</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Update1.5">
+      <option name="closed" value="true" />
+      <created>1698873867054</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1698873867054</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,7 +367,8 @@
     <MESSAGE value="Update1.2" />
     <MESSAGE value="Update1.3" />
     <MESSAGE value="Update1.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update1.4" />
+    <MESSAGE value="Update1.5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update1.5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,18 +1,35 @@
 const form = document.getElementById('form2');
 const canvas2 = document.getElementById('canvas');
+
+const overlay = document.getElementById('overlay');
+const popup = document.getElementById('popup');
+const popupText = document.getElementById('popup-text')
+const popupCloseBtn = document.getElementById('close-btn-popup')
+
 let countScroll = 0;
+
+const errorsList = new Map([
+    ['Incorrect coordinates or it isn`t number', 'Не корректно введены координаты или это не число'],
+    ['Bad Request', 'Ошибка в отправленных данных']
+])
+
+function getErr(errText){
+    return errorsList.get(errText) || errText
+}
+
+function setPopup(info){
+    overlay.classList.add('show')
+    popupText.textContent = info
+    popup.style.display = 'block'
+    popupCloseBtn.addEventListener('click', () => {
+        overlay.classList.remove('show')
+        popup.style.display = 'none'
+    })
+}
 
 canvas2.addEventListener('mousedown', function (event){
     console.log(event.offsetX + ' ' + event.offsetY)
-    const coordR = document.getElementById('coordX')
 
-
-    if (!validX(coordR.value)){
-        removeIfExists('errMessage')
-        const formHTML = document.getElementById('form2');
-        appendBeforeError('Неверно введена координата R', formHTML);
-        return;
-    }
     console.log(validPixelXY(event.offsetX, event.offsetY))
     if (validPixelXY(event.offsetX, event.offsetY)) {
 
@@ -21,6 +38,7 @@ canvas2.addEventListener('mousedown', function (event){
                       radiusInPixel,
                       'controller')
     }
+
 })
 
 function convertToPixelY(coord, centerPixelCoord){
@@ -36,24 +54,25 @@ function convertToPixelRadius(radius, pixelRadius){
 }
 
 function fetchToServer(X, Y, R, URL){
-    const formData = new URLSearchParams()
-    formData.append('X', X)
-    formData.append('Y', Y)
-    formData.append('R', R)
-    fetch(URL, {
-        method: 'POST',
-        body: formData
+    fetch(URL + "?X=" + X +"&Y=" + Y + "&R=" + R, {
+        method: 'GET'
     })
         .then((res) => {
+
             if (res.status !== 200){
                 console.log(res.status)
+                console.log(res)
                 res.text().then((res)=> {
                     console.log(res)
-                    // ТУТ НАДО ВЫВОДИТЬ ОШИБКУ КЛИЕНТУ
+                    setPopup(getErr(res))
+                    return Promise.reject(res)
                 })
+            }else {
+                return res.text()
             }
-            res.text().then((res)=>console.log(res))
-        })
+
+        }).then((res)=>)
+
         .catch((err) => console.warn(err))
 }
 
@@ -72,17 +91,20 @@ function checkHit(X, Y, R){
 
 
 // Валидация для радиуса
-function validR(coordR){
-    return coordR >= 1 && coordR <= 5 && coordR !== ''
+function validY(coordY){
+    if (coordY){
+        return coordY >= -3 && coordY <= 5}
+    return false
 }
 
 function validX(coordX){
-    return coordX >= -3 && coordX <= 3 && coordX !== ''
+    if (coordX){
+        return coordX >= -5 && coordX <= 5}
+    return false
 }
 
-function validY(coordY){
-    return (coordY === -2 || coordY === -1.5 || coordY === -1 || coordY === -0.5 || coordY === 0 || coordY === 0.5
-        || coordY === 1 || coordY === 1.5 || coordY === 2)
+function validR(coordR){
+    return (coordR === 1 || coordR === 1.5 || coordR === 2 || coordR === 2.5 || coordR === 3)
 }
 
 function getRadioValueByName(elemRadio) {
@@ -97,19 +119,17 @@ form.addEventListener('submit', function (event){
     event.preventDefault()
 
     const coordX = document.getElementById('coordX')
-    const radiusR = document.getElementById('radiusR')
+    const coordY = document.getElementById('coordY')
 
-    const radio = document.getElementsByName('coordY');
-    const coordY = getRadioValueByName(radio);
-
-    if (!validX(coordX.value) || !validY(parseFloat(coordY)) || !validR(radiusR.value)){
+    if (!validX(coordX.value) || !validY(coordY.value) || !validR(parseFloat(event.submitter.value))){
         removeIfExists('errMessage')
         const formHTML = document.getElementById('form2');
         appendBeforeError('Неверно введены координаты', formHTML);
         return;
     }
 
-    fetchToServer(coordX.value, coordY, radiusR.value, 'controller')
+    fetchToServer(coordX.value, coordY.value, event.submitter.value, 'controller')
+
 })
 
 
@@ -158,7 +178,3 @@ function appendBody(r, x, y, res, curTime, workTime){
     tr.append(five)
     tr.append(six)
 }
-
-const errorsList = new Map([
-    ['Incorrect coordinates or it isn`t number', 'Не корректно введены координаты или это не число']
-])

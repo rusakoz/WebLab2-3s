@@ -160,7 +160,7 @@ body{
 
 
 
-#button-coords {
+.button-coords {
 
     padding: 4px;
     background: #413f3f;
@@ -168,31 +168,84 @@ body{
     border-radius: 66px;
 }
 
-#button-coords:hover {
+.button-coords:hover {
     color: #ffffff;
     background: #525050;
     transition-delay: 0.1s;
 }
 
-.radio-coords {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-
-    border: 2px solid #545353;
-    transition: 0.2s all linear;
-    outline: none;
-    margin-right: 5px;
-
-    position: relative;
-    top: 4px;
-
+/* ALERT */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
 }
 
-.radio-coords:checked {
-    border: 6px solid #545353;
+#overlay.show {
+    display: block;
 }
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: none;
+}
+
+.popup__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup__title {
+    margin: 0 0 20px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+#close-btn-popup {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: blueviolet;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+}
+
+/*.radio-coords {*/
+/*    -webkit-appearance: none;*/
+/*    -moz-appearance: none;*/
+/*    appearance: none;*/
+
+/*    border-radius: 50%;*/
+/*    width: 16px;*/
+/*    height: 16px;*/
+
+/*    border: 2px solid #545353;*/
+/*    transition: 0.2s all linear;*/
+/*    outline: none;*/
+/*    margin-right: 5px;*/
+
+/*    position: relative;*/
+/*    top: 4px;*/
+
+/*}*/
+
+/*.radio-coords:checked {*/
+/*    border: 6px solid #545353;*/
+/*}*/

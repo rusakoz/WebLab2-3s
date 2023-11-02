@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <thead id="header">
 
 <tr id="header-tr">
@@ -6,7 +6,7 @@
         <ul>
             <li>
                 <h5>
-                    <a href="index.jsp">Кожемякин Руслан Алексеевич P3223 Вариант: 3337</a>
+                    <a href="../../index.jsp">Кожемякин Руслан Алексеевич P3223 Вариант: 3337</a>
                 </h5>
             </li>
         </ul>
@@ -17,7 +17,7 @@
                 <a href="#">Меню</a>
             </li>
             <li>
-                <a href="index.jsp">Главная</a>
+                <a href="../../index.jsp">Главная</a>
             </li>
         </ul>
     </td>

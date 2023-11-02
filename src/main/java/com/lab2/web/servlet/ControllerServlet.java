@@ -35,9 +35,4 @@ public class ControllerServlet extends HttpServlet {
             System.err.println("редирект в jsp");
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
 }

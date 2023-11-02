@@ -2,6 +2,7 @@ package com.lab2.web.servlet;
 
 import com.lab2.web.model.CheckHit;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,16 +23,9 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         System.out.println("accept");
-        PrintWriter out = response.getWriter();
-        out.println("432423");
-
-    }
-
-    @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding(StandardCharsets.UTF_8.name());
         resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
@@ -43,21 +37,20 @@ public class AreaCheckServlet extends HttpServlet {
         if (CheckHit.checkHit(Float.parseFloat(X), Float.parseFloat(Y), Float.parseFloat(R))){
             // рисуем точку и меняем таблицу
             System.out.println("Попал");
-            out.write("попал");
+            //out.write("попал");
+            //resp.setStatus(400);
+            //out.write("Bad Request");
+            req.setAttribute("err_msg", "dsadas");
+            RequestDispatcher ds = req.getRequestDispatcher("index.jsp");
+            ds.forward(req, resp);
         }else{
             // меняем таблицу
             System.out.println("не попал");
             out.write("не попал");
+            resp.setStatus(400);
+            out.write("Bad Request");
         }
-        req.getHeaderNames();
-        System.err.println(X + " " + Y);
-        //resp.setContentType("text/html");
 
-        //PrintWriter out = resp.getWriter();
-        //out.println("<html><body>");
-        //out.println(X);
-        //out.println("</body></html>");
-        out.close();
     }
 
     public void destroy() {
