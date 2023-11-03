@@ -36,13 +36,35 @@
       <table class="result-table">
         <thead>
         <tr>
-          <td>X ${err_msg}</td>
+          <td>X</td>
           <td>Y</td>
           <td>R</td>
           <td>RESULT</td>
           <td>Current time</td>
           <td>Computation time</td>
         </tr>
+        <c:forEach items="${dataTable}" var="data">
+          <tr>
+          <td>
+          <c:out value="${data.X()}"/>
+          </td>
+          <td>
+            <c:out value="${data.Y()}"/>
+          </td>
+          <td>
+            <c:out value="${data.R()}"/>
+          </td>
+          <td>
+            <c:out value="${data.result()}"/>
+          </td>
+          <td>
+            <c:out value="${data.date()}"/>
+          </td>
+          <td>
+            <c:out value="${data.computeTime()}"/>
+          </td>
+          </tr>
+        </c:forEach>
         </thead>
         <tbody id="table-out">
 

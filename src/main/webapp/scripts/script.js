@@ -36,7 +36,7 @@ canvas2.addEventListener('mousedown', function (event){
         fetchToServer(convertToPixelX(event.offsetX, centerX),
                       convertToPixelY(event.offsetY, centerY),
                       radiusInPixel,
-                      'controller')
+                      'controller').catch((err)=>{console.warn(err)})
     }
 
 })
@@ -49,31 +49,39 @@ function convertToPixelX(coord, centerPixelCoord){
     return coord - centerPixelCoord
 }
 
-function convertToPixelRadius(radius, pixelRadius){
-    return radius * pixelRadius
-}
 
-function fetchToServer(X, Y, R, URL){
-    fetch(URL + "?X=" + X +"&Y=" + Y + "&R=" + R, {
-        method: 'GET'
-    })
-        .then((res) => {
+async function fetchToServer(X, Y, R, URL) {
 
-            if (res.status !== 200){
-                console.log(res.status)
-                console.log(res)
-                res.text().then((res)=> {
-                    console.log(res)
-                    setPopup(getErr(res))
-                    return Promise.reject(res)
-                })
-            }else {
-                return res.text()
-            }
+    try {
+        let response = await fetch(URL + "?X=" + X + "&Y=" + Y + "&R=" + R); // Gets a promise
+        // document.innerHTML = await response.text(); // Replaces body with response
+        console.log(response.status)
+        document.open();
+        document.write(await response.text());
+        document.close();
+    } catch (err) {
+        console.log('Fetch error:' + err); // Error handling
+    }
 
-        }).then((res)=>)
-
-        .catch((err) => console.warn(err))
+    // fetch(URL + "?X=" + X + "&Y=" + Y + "&R=" + R, {
+    //     method: 'GET'
+    // })
+    //     .then((res) => {
+    //
+    //         if (res.status !== 200) {
+    //             console.log(res.status)
+    //             console.log(res)
+    //             res.text().then((res) => {
+    //                 console.log(res)
+    //                 setPopup(getErr(res))
+    //                 return Promise.reject(res)
+    //             })
+    //         } else {
+    //             return res.text()
+    //         }
+    //
+    //     }).then((res) => console.log(res))
+    //     .catch((err) => console.warn(err))
 }
 
 function validPixelXY(X, Y){
@@ -127,8 +135,9 @@ form.addEventListener('submit', function (event){
         appendBeforeError('Неверно введены координаты', formHTML);
         return;
     }
-
+    //window.location = 'controller?X=' + coordX.value + '&Y=' + coordY.value + '&R=' + event.submitter.value
     fetchToServer(coordX.value, coordY.value, event.submitter.value, 'controller')
+        .catch((err)=>{console.warn(err)})
 
 })
 

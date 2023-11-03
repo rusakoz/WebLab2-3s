@@ -23,9 +23,6 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getServletPath();
-        System.err.println(action);
-        System.err.println("ватафак");
         if (validationData(request)) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("checkArea");
             dispatcher.forward(request, response);
