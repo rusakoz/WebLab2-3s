@@ -43,31 +43,30 @@
           <td>Current time</td>
           <td>Computation time</td>
         </tr>
-        <c:forEach items="${dataTable}" var="data">
-          <tr>
-          <td>
-          <c:out value="${data.X()}"/>
-          </td>
-          <td>
-            <c:out value="${data.Y()}"/>
-          </td>
-          <td>
-            <c:out value="${data.R()}"/>
-          </td>
-          <td>
-            <c:out value="${data.result()}"/>
-          </td>
-          <td>
-            <c:out value="${data.date()}"/>
-          </td>
-          <td>
-            <c:out value="${data.computeTime()}"/>
-          </td>
-          </tr>
-        </c:forEach>
         </thead>
         <tbody id="table-out">
-
+        <c:forEach items="${sessionScope.dataTable}" var="data">
+          <tr>
+            <td>
+              <c:out value="${data.X()}"/>
+            </td>
+            <td>
+              <c:out value="${data.Y()}"/>
+            </td>
+            <td>
+              <c:out value="${data.R()}"/>
+            </td>
+            <td>
+              <c:out value="${data.result()}"/>
+            </td>
+            <td>
+              <c:out value="${data.date()}"/>
+            </td>
+            <td>
+              <c:out value="${data.computeTime()}"/>
+            </td>
+          </tr>
+        </c:forEach>
         </tbody>
       </table>
     </td>
@@ -79,6 +78,11 @@
     <td class="main-td1"></td>
 
     <td class="main-td1" colspan="3" rowspan="2">
+      <c:if test="${sessionScope.error_msg != null}">
+          <h4 id="errMessage">
+            <c:out value="${sessionScope.error_msg}"/>
+          </h4>
+      </c:if>
       <form id="form2">
         <br>
         <br>

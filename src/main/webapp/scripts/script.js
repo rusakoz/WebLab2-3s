@@ -28,40 +28,50 @@ function setPopup(info){
 }
 
 canvas2.addEventListener('mousedown', function (event){
-    console.log(event.offsetX + ' ' + event.offsetY)
 
-    console.log(validPixelXY(event.offsetX, event.offsetY))
     if (validPixelXY(event.offsetX, event.offsetY)) {
 
-        fetchToServer(convertToPixelX(event.offsetX, centerX),
+        fetchToServer("?X=" + convertToPixelX(event.offsetX, centerX),
                       convertToPixelY(event.offsetY, centerY),
-                      radiusInPixel,
+                      1,
                       'controller').catch((err)=>{console.warn(err)})
     }
 
 })
 
 function convertToPixelY(coord, centerPixelCoord){
-    return centerPixelCoord - coord
+    return (centerPixelCoord - coord) / radiusInPixel
 }
 
 function convertToPixelX(coord, centerPixelCoord){
-    return coord - centerPixelCoord
+    return (coord - centerPixelCoord) / radiusInPixel
 }
 
 
 async function fetchToServer(X, Y, R, URL) {
-
-    try {
-        let response = await fetch(URL + "?X=" + X + "&Y=" + Y + "&R=" + R); // Gets a promise
-        // document.innerHTML = await response.text(); // Replaces body with response
-        console.log(response.status)
-        document.open();
-        document.write(await response.text());
-        document.close();
-    } catch (err) {
-        console.log('Fetch error:' + err); // Error handling
-    }
+    window.location.replace(URL + X + "&Y=" + Y + "&R=" + R)
+    //let response = await fetch(URL + "?E=" + X + "&Y=" + Y + "&R=" + R);
+    // try {
+    //     let response = await fetch(URL + "?E=" + X + "&Y=" + Y + "&R=" + R); // Gets a promise
+    //     // document.innerHTML = await response.text(); // Replaces body with response
+    //     // if (response.status !== 200) {
+    //     //     console.log(response.status)
+    //     //     console.log(response)
+    //     //     let text = await response.text()
+    //     //     console.log(text)
+    //     //     setPopup(getErr(text))
+    //     // } else {
+    //     //     document.open();
+    //     //     document.write(await response.text());
+    //     //     document.close();
+    //     // }
+    //     // console.log("шта")
+    //     // document.open();
+    //     // document.write(await response.text());
+    //     // document.close();
+    // } catch (err) {
+    //     console.log('Fetch error:' + err); // Error handling
+    // }
 
     // fetch(URL + "?X=" + X + "&Y=" + Y + "&R=" + R, {
     //     method: 'GET'
@@ -88,17 +98,7 @@ function validPixelXY(X, Y){
     return (!isNaN(X) && !isNaN(Y))
 }
 
-function checkHit(X, Y, R){
-    console.log(Y - centerY)
 
-    return (X <= R && Y <= R && X >= 0 &&  Y >= 0) ||
-            (X**2 + Y**2 <= R**2 && X <= 0 && Y <= 0) ||
-            (Math.abs(Y) + Math.abs(X) * 2 <= R && X <= 0 && Y >= 0)
-
-}
-
-
-// Валидация для радиуса
 function validY(coordY){
     if (coordY){
         return coordY >= -3 && coordY <= 5}
@@ -136,7 +136,7 @@ form.addEventListener('submit', function (event){
         return;
     }
     //window.location = 'controller?X=' + coordX.value + '&Y=' + coordY.value + '&R=' + event.submitter.value
-    fetchToServer(coordX.value, coordY.value, event.submitter.value, 'controller')
+    fetchToServer("?e=" + coordX.value, coordY.value, event.submitter.value, 'controller')
         .catch((err)=>{console.warn(err)})
 
 })
@@ -156,7 +156,6 @@ function scrollTable(R, X, Y, res, curTime, workTime, collectionElem, startCount
 
 function appendBeforeError(text, elemHTML) {
     const errHTML = document.createElement('h4')
-    errHTML.style.color = 'red';
     errHTML.textContent = text;
     errHTML.id = 'errMessage'
 

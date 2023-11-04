@@ -3,7 +3,6 @@ package com.lab2.web.servlet;
 import com.lab2.web.model.CheckHit;
 import com.lab2.web.model.TableSession;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,28 +23,46 @@ import java.util.List;
 @WebServlet(name = "AreaCheckServlet", value = "/checkArea")
 public class AreaCheckServlet extends HttpServlet {
 
+    private boolean validX(String x){
+        return Float.parseFloat(x) >= -5 && Float.parseFloat(x) <= 5;
+    }
+
+    private boolean validY(String y){
+        return Float.parseFloat(y) >= -3 && Float.parseFloat(y) <= 5;
+    }
+
+    private boolean validR(String r){
+        float x = Float.parseFloat(r);
+        return (x == 1 || x == 1.5 || x == 2 || x == 2.5 || x == 3);
+    }
+
     public void init() {
 
     }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
+
+        PrintWriter out = resp.getWriter();
+        final long startTime = System.nanoTime();
 
         HttpSession session = req.getSession();
-        final long startTime = System.nanoTime();
-        System.out.println("accept");
 
-        System.out.println("accept2");
         String X = req.getParameter("X");
         String Y = req.getParameter("Y");
         String R = req.getParameter("R");
-        PrintWriter out = resp.getWriter();
+        if (!(validX(X) && validY(Y) && validR(R))){
+            session.setAttribute("error_msg", "Ошибка в отправленных данных");
+            resp.sendRedirect("index.jsp");
+            return;
+        }
+
+
         final boolean hit = CheckHit.checkHit(Float.parseFloat(X), Float.parseFloat(Y), Float.parseFloat(R));
-        final long endTime = System.nanoTime() - startTime;
-        final LocalDateTime date = LocalDateTime.now();
         String resHit = hit? "Попал" : "Не попал";
+        final String endTime = String.valueOf(System.nanoTime() - startTime) + "нс";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
+        final String date = LocalDateTime.now().format(formatter);
 
         List<TableSession> list = (List<TableSession>) session.getAttribute("dataTable");
         if (list == null){
@@ -53,11 +71,6 @@ public class AreaCheckServlet extends HttpServlet {
         list.add(new TableSession(X, Y, R, resHit, endTime, date));
         session.setAttribute("dataTable", list);
 
-        // рисуем точку и меняем таблицу
-        System.out.println("Попал");
-        //out.write("попал");
-        //resp.setStatus(400);
-        //out.write("Bad Request");
         resp.setContentType("text/html;charset=UTF-8");
         out.println("<!DOCTYPE html>");
         out.println("<html lang=\"ru\">");
@@ -114,7 +127,7 @@ public class AreaCheckServlet extends HttpServlet {
         out.println("        </table>");
 
         out.println("    <div class=\"blured-container round-container fit-content-container margin\">"); // Здесь подставьте результат вычислений
-        out.println("        <p><a href=\"controller\">Вернуться на главную страницу</a></p>");
+        out.println("        <p><a href=\"index.jsp\">Вернуться на главную страницу</a></p>");
         out.println("    </div>");
         out.println("           </thead>");
         out.println("</body>");

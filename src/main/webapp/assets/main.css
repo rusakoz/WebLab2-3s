@@ -227,6 +227,10 @@ body{
     font-family: "Montserrat", sans-serif;
 }
 
+#errMessage {
+    color: red;
+}
+
 /*.radio-coords {*/
 /*    -webkit-appearance: none;*/
 /*    -moz-appearance: none;*/
