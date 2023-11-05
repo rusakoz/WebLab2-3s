@@ -5,7 +5,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Вторая лаба по Вебу</title>
-<%--  <style><%@include file="/assets/main.css"%></style>--%>
   <link rel="StyleSheet" href="assets/main.css" type="text/css">
   <script src="scripts/draw.js" defer></script>
   <script src="scripts/script.js" defer></script>
@@ -78,11 +77,6 @@
     <td class="main-td1"></td>
 
     <td class="main-td1" colspan="3" rowspan="2">
-      <c:if test="${sessionScope.error_msg != null}">
-          <h4 id="errMessage">
-            <c:out value="${sessionScope.error_msg}"/>
-          </h4>
-      </c:if>
       <form id="form2">
         <br>
         <br>
@@ -143,8 +137,5 @@
   </tbody>
 
   <%@ include file="include/footerHeader/footer.jsp"%>
-
-<%--  <script type="text/javascript" charset="UTF-8"><%@include file="/scripts/draw.js"%></script>--%>
-<%--  <script type="text/javascript" charset="UTF-8"><%@include file="/scripts/script.js"%></script>--%>
 
 </table>

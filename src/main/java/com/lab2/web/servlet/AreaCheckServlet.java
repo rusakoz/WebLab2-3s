@@ -10,15 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-//import jakarta.servlet.ServletException;
-//import jakarta.servlet.http.*;
-//import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "AreaCheckServlet", value = "/checkArea")
 public class AreaCheckServlet extends HttpServlet {
@@ -36,9 +32,6 @@ public class AreaCheckServlet extends HttpServlet {
         return (x == 1 || x == 1.5 || x == 2 || x == 2.5 || x == 3);
     }
 
-    public void init() {
-
-    }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -52,16 +45,15 @@ public class AreaCheckServlet extends HttpServlet {
         String Y = req.getParameter("Y");
         String R = req.getParameter("R");
         if (!(validX(X) && validY(Y) && validR(R))){
-            session.setAttribute("error_msg", "Ошибка в отправленных данных");
-            resp.sendRedirect("index.jsp");
+            resp.sendError(400, "Ошибка в отправленных данных");
             return;
         }
 
 
         final boolean hit = CheckHit.checkHit(Float.parseFloat(X), Float.parseFloat(Y), Float.parseFloat(R));
-        String resHit = hit? "Попал" : "Не попал";
+        final String resHit = hit? "Попал" : "Не попал";
         final String endTime = String.valueOf(System.nanoTime() - startTime) + "нс";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss");
         final String date = LocalDateTime.now().format(formatter);
 
         List<TableSession> list = (List<TableSession>) session.getAttribute("dataTable");
@@ -103,10 +95,12 @@ public class AreaCheckServlet extends HttpServlet {
         out.println("                Computation time");
         out.println("            </td>");
         out.println("            </tr>");
+        out.println("           </thead>");
 
+        out.println("           <tbody>");
         out.println("            <tr>");
         out.println("            <td>");
-        out.println("                "+ X);
+        out.println("                " + X);
         out.println("            </td>");
         out.println("            <td>");
         out.println("                " + Y);
@@ -124,24 +118,18 @@ public class AreaCheckServlet extends HttpServlet {
         out.println("                " + endTime);
         out.println("            </td>");
         out.println("            </tr>");
+        out.println("           </tbody>");
         out.println("        </table>");
 
-        out.println("    <div class=\"blured-container round-container fit-content-container margin\">"); // Здесь подставьте результат вычислений
-        out.println("        <p><a href=\"index.jsp\">Вернуться на главную страницу</a></p>");
-        out.println("    </div>");
-        out.println("           </thead>");
+        out.println("    <tr>");
+        out.println("       <td>");
+        out.println("           <p><a href=\"/WebLab2/index.jsp\">Вернуться на главную страницу</a></p>");
+        out.println("       </td>");
+        out.println("    </tr>");
         out.println("</body>");
         out.println("</html>");
 
         out.close();
 
-//            req.setAttribute("err_msg", "dsadas");
-//            RequestDispatcher ds = req.getRequestDispatcher("index.jsp");
-//            ds.forward(req, resp);
-
-
-    }
-
-    public void destroy() {
     }
 }

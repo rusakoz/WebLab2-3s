@@ -15,38 +15,20 @@ td {
 
 #footer {
     position: relative;
-
     padding-left: 15%;
     padding-right: 15%;
     width: 100%;
 }
 
 #footer-tr {
-    /*position: relative;*/
     width: 100%;
-}
-
-#footer-td1 {
-    /*width: 20%;*/
-}
-
-#footer-td2 {
-    /*width: 20%;*/
-
-}
-
-#footer-td3 {
-    /*width: 20%;*/
 }
 
 #footer td {
     position: relative;
-    /*display: inline-block;*/
-    /*width: 32%;*/
 }
 
 /*FOOTER*/
-
 
 table {
     border-collapse: collapse; /*убирает рамки таблицы*/
@@ -61,7 +43,6 @@ body{
 
 
 /*HEADER*/
-
 
 #header ul {
     margin: 0;
@@ -78,7 +59,7 @@ body{
     transition-delay: 0.15s;
     color: #a83dff;
     height: 100%;
-    list-style-type: none; /*убрать точку у ссылок*/
+    list-style-type: none;
 }
 
 #td-1 h1 {
@@ -93,7 +74,6 @@ body{
 
 #td-2 ul li{
     float: right;
-    /*padding: 0.9rem;*/
     padding-right: 5px;
     vertical-align: middle;
     list-style-type: none;
@@ -101,7 +81,6 @@ body{
 }
 
 #td-2 ul li a{
-    /*padding: 10px;*/
     display: block;
     padding: 0.9rem;
     font-size: 150%;
@@ -121,7 +100,6 @@ body{
 }
 
 #header-tr {
-    /*background: black;*/
     height: 100%;
     width: 100%;
 }
@@ -130,13 +108,11 @@ body{
     margin: 0;
     padding-left: 15%;
     height: 100%;
-    /*width: 50%;*/
 }
 
 #td-2 {
     padding-right: 15%;
     margin: 0;
-    /*width: 51%;*/
     height: 100%;
 }
 
@@ -154,8 +130,6 @@ body{
 
 .main-td1 {
     width: 10%;
-    /*height: 250px;*/
-    /*width: 30%;*/
 }
 
 
@@ -230,26 +204,3 @@ body{
 #errMessage {
     color: red;
 }
-
-/*.radio-coords {*/
-/*    -webkit-appearance: none;*/
-/*    -moz-appearance: none;*/
-/*    appearance: none;*/
-
-/*    border-radius: 50%;*/
-/*    width: 16px;*/
-/*    height: 16px;*/
-
-/*    border: 2px solid #545353;*/
-/*    transition: 0.2s all linear;*/
-/*    outline: none;*/
-/*    margin-right: 5px;*/
-
-/*    position: relative;*/
-/*    top: 4px;*/
-
-/*}*/
-
-/*.radio-coords:checked {*/
-/*    border: 6px solid #545353;*/
-/*}*/
