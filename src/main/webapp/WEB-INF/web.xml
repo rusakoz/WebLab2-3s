@@ -8,7 +8,7 @@
         <location>/ExceptionHandler</location>
     </error-page>
 
-    <!-- Config here. -->
+
     <welcome-file-list>
         <welcome-file>/WebLab2/indexJSP</welcome-file>
     </welcome-file-list>

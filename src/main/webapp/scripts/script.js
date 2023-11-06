@@ -4,16 +4,13 @@ const canvas2 = document.getElementById('canvas');
 canvas2.addEventListener('mousedown', function (event){
 
     if (validPixelXY(event.offsetX, event.offsetY)) {
-        // printPoint(convertPixelToCoordX(event.offsetX, centerX),
-        //            convertPixelToCoordY(event.offsetY, centerY),
-        //         1)
+
         sendToServer(convertPixelToCoordX(event.offsetX, centerX),
                       convertPixelToCoordY(event.offsetY, centerY),
                       1,
                       'controller')
             .catch((err)=>{console.warn(err)})
     }
-
 })
 
 form.addEventListener('submit', function (event){
@@ -30,7 +27,6 @@ form.addEventListener('submit', function (event){
         return;
     }
 
-    //printPoint(coordX.value, coordY.value, event.submitter.value)
     sendToServer(coordX.value, coordY.value, event.submitter.value, 'controller')
         .catch((err)=>{console.warn(err)})
 
@@ -47,26 +43,6 @@ function convertPixelToCoordX(coord, centerPixelCoord){
 
 async function sendToServer(X, Y, R, URL) {
     window.location.replace(URL + "?X=" + X + "&Y=" + Y + "&R=" + R)
-
-
-    // try {
-    //     let response = await fetch(URL + "?X=" + X + "&Y=" + Y + "&R=" + R);
-    //     // document.innerHTML = await response.text();
-    //     // if (response.status !== 200) {
-    //     //     let text = await response.text()
-    //     //     setPopup(getErr(text))
-    //     // } else {
-    //     //     document.open();
-    //     //     document.write(await response.text());
-    //     //     document.close();
-    //     // }
-    //     // document.open();
-    //     // document.write(await response.text());
-    //     // document.close();
-    // } catch (err) {
-    //     console.log('Fetch error:' + err);
-    // }
-
 }
 
 function validPixelXY(X, Y){

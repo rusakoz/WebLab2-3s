@@ -6,8 +6,6 @@
   <meta charset="UTF-8">
   <title>Вторая лаба по Вебу</title>
   <link rel="StyleSheet" href="assets/main.css" type="text/css">
-
-
 </head>
 
 <body>

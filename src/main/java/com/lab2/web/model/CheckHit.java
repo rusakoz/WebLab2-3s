@@ -1,5 +1,10 @@
 package com.lab2.web.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@EqualsAndHashCode
+@ToString
 public class CheckHit {
 
     public static boolean checkHit(float X,float Y,float R){

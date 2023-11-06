@@ -9,11 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d833976-b7aa-46f9-be65-cac543614b4e" name="Changes" comment="Update1.9.1">
+    <list default="true" id="1d833976-b7aa-46f9-be65-cac543614b4e" name="Changes" comment="Update2.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/draw.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/draw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/scripts/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/scripts/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +285,7 @@
       <workItem from="1699182921554" duration="14566000" />
       <workItem from="1699214911468" duration="8176000" />
       <workItem from="1699223359297" duration="2852000" />
-      <workItem from="1699271787522" duration="2776000" />
+      <workItem from="1699271787522" duration="3362000" />
     </task>
     <task id="LOCAL-00001" summary="FirstCommit">
       <option name="closed" value="true" />
@@ -386,7 +383,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699226315579</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Update2.0">
+      <option name="closed" value="true" />
+      <created>1699274918924</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699274918924</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -416,7 +421,8 @@
     <MESSAGE value="Update1.8" />
     <MESSAGE value="Update1.9" />
     <MESSAGE value="Update1.9.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update1.9.1" />
+    <MESSAGE value="Update2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update2.0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
