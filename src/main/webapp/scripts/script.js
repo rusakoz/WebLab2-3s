@@ -4,7 +4,9 @@ const canvas2 = document.getElementById('canvas');
 canvas2.addEventListener('mousedown', function (event){
 
     if (validPixelXY(event.offsetX, event.offsetY)) {
-
+        // printPoint(convertPixelToCoordX(event.offsetX, centerX),
+        //            convertPixelToCoordY(event.offsetY, centerY),
+        //         1)
         sendToServer(convertPixelToCoordX(event.offsetX, centerX),
                       convertPixelToCoordY(event.offsetY, centerY),
                       1,
@@ -28,6 +30,7 @@ form.addEventListener('submit', function (event){
         return;
     }
 
+    //printPoint(coordX.value, coordY.value, event.submitter.value)
     sendToServer(coordX.value, coordY.value, event.submitter.value, 'controller')
         .catch((err)=>{console.warn(err)})
 

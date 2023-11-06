@@ -5,6 +5,7 @@ const centerX = 151.5
 const centerY = 151.5
 const widthAxisY = 3
 const heightAxisX = 3
+
 draw()
 function draw(){
 
@@ -87,8 +88,8 @@ function draw(){
 
 function printPoint(R, X, Y){
     draw()
-    let x = 149.4 + (50 / R) * X
-    let y = 149.4 + (-50 / R) * Y
+    let x = centerX - 2 + (50 / R) * X
+    let y = centerY - 2 + (-50 / R) * Y
     ctx.fillStyle = 'red'
     ctx.fillRect(x, y, 4, 4)
 

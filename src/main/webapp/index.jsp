@@ -6,14 +6,14 @@
   <meta charset="UTF-8">
   <title>Вторая лаба по Вебу</title>
   <link rel="StyleSheet" href="assets/main.css" type="text/css">
-  <script src="scripts/draw.js" defer></script>
-  <script src="scripts/script.js" defer></script>
+
+
 </head>
 
-
+<body>
 <table>
 
-  <%@ include file="include/modal/alert.jsp"%>
+  <%@ include file="include/modal/alert.jsp" %>
 
   <%@ include file="include/footerHeader/header.jsp"%>
 
@@ -139,3 +139,15 @@
   <%@ include file="include/footerHeader/footer.jsp"%>
 
 </table>
+</body>
+
+<script src="scripts/draw.js"></script>
+<script src="scripts/script.js"></script>
+<script type="text/javascript">
+  <c:out value="printPoint(${sessionScope.dataTable.get(sessionScope.dataTable.size() - 1).R()},
+                           ${sessionScope.dataTable.get(sessionScope.dataTable.size() - 1).X()},
+                           ${sessionScope.dataTable.get(sessionScope.dataTable.size() - 1).Y()})"/>
+
+</script>
+
+</html>
